@@ -46,16 +46,22 @@ class Book:
         else:
             print(f"{user.name} did not borrow {self.title}.")
 
-            
-
 class User:
     def __init__(self, name, email):
         self.name = name
         self.email = email
         self.borrowed = []
 
-    def test():
+    def borrow_book(self, book):
+        if book.available:
+            book.borrow_book(self)
+            self.borrowed.append(book)
+        else:
+            print(f"{book.title} is not available for borrowing.")
 
-
-def main():
-    if x > 1:
+    def return_book(self, book):
+        if book in self.borrowed:
+            book.return_book(self)
+            self.borrowed_books.remove(book)
+        else:
+            print(f"You did not borrow {book.title}")
