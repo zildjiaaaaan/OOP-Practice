@@ -21,9 +21,6 @@ class BankAccount():
 
     def withdraw(self, amount):
         self.balance -= amount
-    
-    def get_acc(self):
-        return self.account_number
 
     def get_balance(self):
         return self.balance
