@@ -62,6 +62,20 @@ class User:
     def return_book(self, book):
         if book in self.borrowed:
             book.return_book(self)
-            self.borrowed_books.remove(book)
+            self.borrowed.remove(book)
         else:
             print(f"You did not borrow {book.title}")
+
+class Library:
+    def __init__(self):
+        self.books = []
+        self.users = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def add_user(self, user):
+        self.users.append(user)
+
+    def display_books(self):
+        ...
