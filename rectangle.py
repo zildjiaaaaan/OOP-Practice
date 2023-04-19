@@ -29,3 +29,20 @@ class Rectangle():
         if self.length == self.width:
             return True
         return False
+
+
+def main():
+
+    rectangle1 = Rectangle(2, 5)
+    rectangle2 = Rectangle(10, 10)
+
+    print(rectangle1.area())
+    print(rectangle2.area())
+
+    print(rectangle1.perimeter())
+    print(rectangle2.perimeter())
+
+    print(rectangle1.is_square())
+    print(rectangle2.is_square())
+
+main()
