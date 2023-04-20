@@ -78,4 +78,50 @@ class Library:
         self.users.append(user)
 
     def display_books(self):
-        ...
+        if not self.books:
+            print("No books available in the library.")
+        else:
+            print("Available books in the library:")
+            for book in self.books:
+                if book.available:
+                    print(book.title)
+    
+    def display_user(self):
+        if not self.users:
+            print("No users in the library.")
+        else:
+            print("Users in the library:")
+            for user in self.users:
+                print(user.name)
+        
+    def borrow_book(self, user_name, book_title):
+        user = self.find_user(user_name)
+        book = self.find_book(book_title)
+        if user and book:
+            user.borrow_book(book)
+        elif not user:
+            print(f"{user_name} is not a member of the library.")
+        elif not book:
+            print(f"{book_title} is not available in the library.")
+    
+    def return_book(self, user_name, book_title):
+        user = self.find_user(user_name)
+        book = self.find_book(book_title)
+        if user and book:
+            user.return_book(book)
+        elif not user:
+            print(f"{user_name} is not a member of the library.")
+        elif not book:
+            print(f"{book_title} is not a valid book.")
+    
+    def find_user(self, name):
+        for user in self.users:
+            if user.name == name:
+                return user
+        return None
+    
+    def find_book(self,title):
+        for book in self.books:
+            if book.title == title:
+                return book
+        return None
