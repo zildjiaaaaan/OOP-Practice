@@ -13,7 +13,7 @@ You should use OOP concepts such as inheritance, encapsulation, and polymorphism
 
 """
 from datetime import datetime
-    
+
 class Book:
     def __init__(self, title, author, isbn):
         self.title = title
@@ -21,20 +21,15 @@ class Book:
         self.isbn = isbn
         self.available = True
         self.borrowers = {}
-    
-    def is_available(self):
-        if self.available:
-            return True
-        return False
 
-    def borrow_book(self, user):
+    def borrow(self, user):
         if self.available:
             self.available = False
             self.borrowers[user] = datetime.now()
             print(f"{self.title} has been borrowed by {user.name}.")
         else:
             print(f"{self.title} is not available for borrowing.")
-    
+
     def return_book(self, user):
         if user in self.borrowers:
             self.available = True
@@ -50,21 +45,21 @@ class User:
     def __init__(self, name, email):
         self.name = name
         self.email = email
-        self.borrowed = []
+        self.borrowed_books = []
 
     def borrow_book(self, book):
         if book.available:
-            book.borrow_book(self)
-            self.borrowed.append(book)
+            book.borrow(self)
+            self.borrowed_books.append(book)
         else:
             print(f"{book.title} is not available for borrowing.")
 
     def return_book(self, book):
-        if book in self.borrowed:
+        if book in self.borrowed_books:
             book.return_book(self)
-            self.borrowed.remove(book)
+            self.borrowed_books.remove(book)
         else:
-            print(f"You did not borrow {book.title}")
+            print(f"You did not borrow {book.title}.")
 
 class Library:
     def __init__(self):
@@ -85,15 +80,15 @@ class Library:
             for book in self.books:
                 if book.available:
                     print(book.title)
-    
-    def display_user(self):
+
+    def display_users(self):
         if not self.users:
             print("No users in the library.")
         else:
             print("Users in the library:")
             for user in self.users:
                 print(user.name)
-        
+
     def borrow_book(self, user_name, book_title):
         user = self.find_user(user_name)
         book = self.find_book(book_title)
@@ -103,7 +98,7 @@ class Library:
             print(f"{user_name} is not a member of the library.")
         elif not book:
             print(f"{book_title} is not available in the library.")
-    
+
     def return_book(self, user_name, book_title):
         user = self.find_user(user_name)
         book = self.find_book(book_title)
@@ -113,14 +108,14 @@ class Library:
             print(f"{user_name} is not a member of the library.")
         elif not book:
             print(f"{book_title} is not a valid book.")
-    
+
     def find_user(self, name):
         for user in self.users:
             if user.name == name:
                 return user
         return None
-    
-    def find_book(self,title):
+
+    def find_book(self, title):
         for book in self.books:
             if book.title == title:
                 return book
